@@ -8,6 +8,7 @@ Olga Hartoog
 
 ```r
 activity <- read.csv("activity.csv")
+
 activity$date <- as.Date(activity$date)
 ```
 
@@ -30,7 +31,7 @@ hist(activity_daily$totalsteps,
      )
 ```
 
-![](PA1_ohartoog_files/figure-html/stepsday-1.png)<!-- -->
+![](PA1_template_files/figure-html/stepsday-1.png)<!-- -->
 
 Calulate the median and mean of the total number of steps per day.
 
@@ -63,7 +64,7 @@ plot(activity_avgday$interval,
      )
 ```
 
-![](PA1_ohartoog_files/figure-html/stepsavgday-1.png)<!-- -->
+![](PA1_template_files/figure-html/stepsavgday-1.png)<!-- -->
 
 The interval with the highest average number of steps:
 
@@ -116,7 +117,7 @@ hist(activity_imputed_daily$totalsteps,
      )
 ```
 
-![](PA1_ohartoog_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
 
 Calulate the median and mean of the total number of steps per day on the imputed file.
 
@@ -165,4 +166,4 @@ xyplot(activity_imputed_avgday$meansteps~activity_imputed_avgday$interval|activi
        )
 ```
 
-![](PA1_ohartoog_files/figure-html/weekdayplot-1.png)<!-- -->
+![](PA1_template_files/figure-html/weekdayplot-1.png)<!-- -->
