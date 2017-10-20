@@ -9,6 +9,7 @@
 <meta name="generator" content="pandoc" />
 
 
+<meta name="author" content="Olga Hartoog" />
 
 
 <title>Reproducible Research: Peer Assessment 1</title>
@@ -116,6 +117,8 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Reproducible Research: Peer Assessment 1</h1>
+<h4 class="author"><em>Olga Hartoog</em></h4>
+<h4 class="date"><em>20-10-2017</em></h4>
 
 </div>
 
@@ -127,7 +130,7 @@ activity$date &lt;- as.Date(activity$date)</code></pre>
 </div>
 <div id="what-is-mean-total-number-of-steps-taken-per-day" class="section level2">
 <h2>What is mean total number of steps taken per day?</h2>
-<p>Load the dplyr library</p>
+<p>Load the libraries for the assignment</p>
 <pre class="r"><code>library(dplyr)
 library(lattice)</code></pre>
 <p>Calculate and show the total number of steps per day</p>
@@ -161,6 +164,7 @@ plot(activity_avgday$interval,
 ##   interval meansteps
 ##      &lt;int&gt;     &lt;dbl&gt;
 ## 1      835  206.1698</code></pre>
+<p>The interval with the maximum average number of steps is 835.</p>
 </div>
 <div id="imputing-missing-values" class="section level2">
 <h2>Imputing missing values</h2>
@@ -169,12 +173,15 @@ plot(activity_avgday$interval,
 <pre><code>## [1] 2304</code></pre>
 <p>Imputing the missing values with the mean number of steps of the interval:</p>
 <pre class="r"><code>activity_imputed &lt;- merge(activity,activity_avgday)
+
 activity_imputed$steps &lt;- ifelse(is.na(activity_imputed$steps),
                                   activity_imputed$meansteps,
                                   activity_imputed$steps)
+
 activity_imputed$meansteps &lt;- NULL</code></pre>
 <p>Show the histogram for the imputed dataset:</p>
 <pre class="r"><code>activity_imputed_daily &lt;- activity_imputed %&gt;% group_by(date) %&gt;% summarise(totalsteps = sum(steps))
+
 hist(activity_imputed_daily$totalsteps,
      breaks = 30,
      main = &quot;Histogram of total number of steps per day&quot;,

@@ -1,4 +1,6 @@
 # Reproducible Research: Peer Assessment 1
+Olga Hartoog  
+20-10-2017  
 
 
 ## Loading and preprocessing the data
@@ -10,7 +12,7 @@ activity$date <- as.Date(activity$date)
 ```
 
 ## What is mean total number of steps taken per day?
-Load the dplyr library
+Load the libraries for the assignment
 
 ```r
 library(dplyr)
@@ -76,6 +78,9 @@ activity_avgday[which.max(activity_avgday$meansteps),]
 ## 1      835  206.1698
 ```
 
+
+The interval with the maximum average number of steps is 835.
+
 ## Imputing missing values
 Total number of missing values in the data:
 
@@ -91,9 +96,11 @@ Imputing the missing values with the mean number of steps of the interval:
 
 ```r
 activity_imputed <- merge(activity,activity_avgday)
+
 activity_imputed$steps <- ifelse(is.na(activity_imputed$steps),
                                   activity_imputed$meansteps,
                                   activity_imputed$steps)
+
 activity_imputed$meansteps <- NULL
 ```
 
@@ -101,6 +108,7 @@ Show the histogram for the imputed dataset:
 
 ```r
 activity_imputed_daily <- activity_imputed %>% group_by(date) %>% summarise(totalsteps = sum(steps))
+
 hist(activity_imputed_daily$totalsteps,
      breaks = 30,
      main = "Histogram of total number of steps per day",
@@ -108,7 +116,7 @@ hist(activity_imputed_daily$totalsteps,
      )
 ```
 
-![](PA1_ohartoog_files/figure-html/unnamed-chunk-1-1.png)<!-- -->
+![](PA1_ohartoog_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
 
 Calulate the median and mean of the total number of steps per day on the imputed file.
 
